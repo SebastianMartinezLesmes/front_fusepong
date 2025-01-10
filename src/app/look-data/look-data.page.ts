@@ -65,7 +65,7 @@ export class LookDataPage implements OnInit {
     )
   };
 
-  selectedCompany: any = [];
+  selectedCompany: any = null;
   nameNewProyect: string = '';
   getComp(comp: any): void {
     console.log('Datos de la compañía seleccionada:', comp);
@@ -98,7 +98,7 @@ export class LookDataPage implements OnInit {
     )
   };
 
-  selectedProject: any = [];
+  selectedProject: any = null;
   ticketDesc: string = '';
   ticketEstado: string = 'Activo';
   ticketComentarios: string = '';
@@ -146,15 +146,33 @@ export class LookDataPage implements OnInit {
   };
 
   selectedTicket: any = [];
-  getTicket(ticket:any){
+  ticketWindow: string = '';
+  ticketStatus: string  = '';
+  getTicket(ticket: any, action: string) {
     console.log('Datos del ticket seleccionada:', ticket);
     this.selectedTicket = ticket;
+    this.ticketWindow = action; // Cambia la ventana según la acción seleccionada
+  }
+
+  postComentTicket(){
+    if (!this.ticketComentarios) {
+      console.error('Faltan datos para agregar el ticket');
+      return;
+    }
   };
 
-  ticketComentario: string  = '';
-  ticketdesc: string  = '';
-  postComentTicket(){}
-  putStatusTicket(){}
-  putDescTicket(){}
+  putDescTicket(){
+    if (!this.ticketDesc) {
+      console.error('Faltan datos para actualizar la descripcion del ticket');
+      return;
+    }
+  };
+
+  putStatusTicket(){
+    if (!this.ticketStatus) {
+      console.error('Faltan datos para actualizar el estado del ticket');
+      return;
+    }
+  };
 
 }

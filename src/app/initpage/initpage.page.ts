@@ -13,6 +13,7 @@ import { IonicModule } from '@ionic/angular';
 })
 export class InitpagePage implements OnInit {
 
+  companies: any = [];
   users: any = [];
 
   constructor(private http: HttpClient) { }
@@ -29,5 +30,11 @@ export class InitpagePage implements OnInit {
       }, (error) => { console.error('Error al obtener las compañias del servidor:', error); }
     )
   };
-
+  getCompanies() {
+    this.http.get('http://localhost:8000/corporations').subscribe(
+      (response) => {
+        this.companies = response;
+      }, (error) => { console.error('Error al obtener las compañias del servidor:', error); }
+    )
+  };
 }

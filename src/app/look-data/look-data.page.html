@@ -29,7 +29,7 @@
       </ion-card>
     </ng-container>
     
-    <ion-card *ngIf="selectedCompany !== ''" id="crearProyecto">
+    <ion-card *ngIf="selectedCompany" id="crearProyecto">
       <ion-card-header>Agregar Proyecto</ion-card-header>
       <ion-card-content>
         <label for="company">Nombre del proyecto</label>
@@ -55,7 +55,7 @@
       </ion-card>
     </ng-container>
 
-    <ion-card *ngIf="selectedProject !== ''" id="crearTicket">
+    <ion-card *ngIf="selectedProject" id="crearTicket">
       <ion-card-header>Agregar ticket</ion-card-header>
       <ion-card-content>
     
@@ -88,11 +88,46 @@
           Usuario FK: {{ ticket.usuarioFK }} <br />
           Estado: {{ ticket.estado }} 
         </ion-card-content>
-        <ion-button (clic)="getTicket(ticket)">Add coment</ion-button>
-        <ion-button (clic)="getTicket(ticket)">Change desc</ion-button>
-        <ion-button (clic)="getTicket(ticket)">change status</ion-button>
+        <ion-button (click)="getTicket(ticket, 'addComent')">Add coment</ion-button>
+        <ion-button (click)="getTicket(ticket, 'changeDesc')">Change desc</ion-button>
+        <ion-button (click)="getTicket(ticket, 'changeStatus')">Change status</ion-button>
       </ion-card>
     </ng-container>
+    
+    <ion-card *ngIf="selectedTicket && ticketWindow === 'addComent'">
+      <ion-card-header>Add comment</ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-label position="stacked">Comentario</ion-label>
+          <ion-input [(ngModel)]="ticketComentarios" placeholder="Ingrese un comentario" required></ion-input>
+        </ion-item>
+      </ion-card-content>
+      <ion-button (click)="postComentTicket()">Add Comment</ion-button>
+    </ion-card>
+    
+    <ion-card *ngIf="selectedTicket && ticketWindow === 'changeDesc'">
+      <ion-card-header>Change descripcion</ion-card-header>
+      <ion-card-content>
+        <label for="desc">Descripción del ticket</label>
+        <textarea id="desc" [(ngModel)]="ticketDesc" placeholder="Ingrese la descripción del ticket" required></textarea>
+      </ion-card-content>
+      <ion-button (click)="putDescTicket()">Change descripcion</ion-button>
+    </ion-card>
+    
+    <ion-card *ngIf="selectedTicket && ticketWindow === 'changeStatus'">
+      <ion-card-header>Change status</ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-label position="stacked">Estado</ion-label>
+          <ion-select [(ngModel)]="ticketStatus" placeholder="Seleccione un estado" required>
+            <ion-select-option value="Activado">Activado</ion-select-option>
+            <ion-select-option value="En Proceso">En proceso</ion-select-option>
+            <ion-select-option value="Finalizado">Finalizado</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-card-content>
+      <ion-button (click)="putStatusTicket()">Change status</ion-button>
+    </ion-card>    
 
     <ng-container *ngIf="activeSection === 'usuarios'">
       <h2>Usuarios</h2>

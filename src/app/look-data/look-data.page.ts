@@ -39,8 +39,7 @@ export class LookDataPage implements OnInit {
         this.companies = response;
       }, (error) => { console.error('Error al obtener las compañias del servidor:', error); }
     )
-  }
-
+  };
   getProjects() {
     this.http.get('http://localhost:8000/proyects').subscribe(
       (response) => {
@@ -48,8 +47,7 @@ export class LookDataPage implements OnInit {
         this.projects = response;
       }, (error) => { console.error('Error al obtener las compañias del servidor:', error); }
     )
-  }
-
+  };
   getTickets() { 
     this.http.get('http://localhost:8000/tickets').subscribe(
       (response) => {
@@ -57,8 +55,7 @@ export class LookDataPage implements OnInit {
         this.tickets = response;
       }, (error) => { console.error('Error al obtener las compañias del servidor:', error); }
     )
-  }
-
+  };
   getUsers() { 
     this.http.get('http://localhost:8000/users').subscribe(
       (response) => {
@@ -66,5 +63,98 @@ export class LookDataPage implements OnInit {
         this.users = response;
       }, (error) => { console.error('Error al obtener las compañias del servidor:', error); }
     )
-  }
+  };
+
+  selectedCompany: any = [];
+  nameNewProyect: string = '';
+  getComp(comp: any): void {
+    console.log('Datos de la compañía seleccionada:', comp);
+    this.selectedCompany = comp;
+  };
+  postProyect(): void {
+    if (!this.nameNewProyect || !this.selectedCompany) {
+      console.error('Faltan datos para agregar el proyecto');
+      return;
+    }
+    
+    // Construir el objeto del proyecto a enviar
+    const nuevoProyecto = {
+      idProyecto: this.projects.length + 1, // Aquí puedes generar un ID único
+      titulo: this.nameNewProyect,
+      empresaFK: this.selectedCompany.idEmpresa,  // Suponiendo que `nit` es el ID de la empresa
+    };
+
+    // Realizar la solicitud POST
+    this.http.post('http://localhost:8000/createProyects', nuevoProyecto).subscribe(
+      (response) => {
+        console.log('Proyecto agregado con éxito:', response);
+        this.projects.push(response); // Agregar el proyecto al listado de proyectos
+        this.nameNewProyect = ''; // Limpiar el campo de nombre del proyecto
+        this.selectedCompany = null; // Limpiar la compañía seleccionada
+      },
+      (error) => {
+        console.error('Error al agregar el proyecto:', error);
+      }
+    )
+  };
+
+  selectedProject: any = [];
+  ticketDesc: string = '';
+  ticketEstado: string = 'Activo';
+  ticketComentarios: string = '';
+  selectedUserId: string = '';
+  getProj(proj:any){
+    console.log('Datos del Proyecto seleccionada:', proj);
+    this.selectedProject = proj;
+  };
+  postTicket() {
+    if (!this.ticketDesc || !this.ticketEstado || !this.selectedUserId || !this.selectedProject) {
+      console.error('Faltan datos para agregar el ticket');
+      return;
+    }
+
+    // Construir el objeto ticket a enviar
+    const nuevoTicket = {
+      idTicket: this.tickets.length + 1, // ID único para el ticket
+      desc: this.ticketDesc,
+      comentarios: [
+        {
+          idComent: 0, // Aquí puedes ajustar la lógica para manejar los comentarios si es necesario
+          comentario: this.ticketComentarios
+        }
+      ],
+      estado: this.ticketEstado,
+      proyectoFK: this.selectedProject.idProyecto, // ID del proyecto
+      usuarioFK: this.selectedUserId, // ID del usuario 
+    };
+    console.log(nuevoTicket)
+
+    // Realizar la solicitud POST para agregar el ticket
+    this.http.post('http://localhost:8000/createTickets', nuevoTicket).subscribe(
+      (response) => {
+        console.log('Ticket agregado con éxito:', response);
+        this.tickets.push(response); // Agregar el ticket al listado de tickets
+        this.ticketDesc = ''; // Limpiar el campo de descripción
+        this.ticketEstado = ''; // Limpiar el campo de estado
+        this.ticketComentarios = ''; // Limpiar los comentarios
+        this.selectedProject = null; // Limpiar el proyecto seleccionado
+      },
+      (error) => {
+        console.error('Error al agregar el ticket:', error);
+      }
+    )
+  };
+
+  selectedTicket: any = [];
+  getTicket(ticket:any){
+    console.log('Datos del ticket seleccionada:', ticket);
+    this.selectedTicket = ticket;
+  };
+
+  ticketComentario: string  = '';
+  ticketdesc: string  = '';
+  postComentTicket(){}
+  putStatusTicket(){}
+  putDescTicket(){}
+
 }

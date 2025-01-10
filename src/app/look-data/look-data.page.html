@@ -25,9 +25,23 @@
           Dirección: {{ comp.direccion }} <br />
           Correo: {{ comp.correo }}
         </ion-card-content>
+        <ion-button (click)="getComp(comp)">Añadir proyecto</ion-button>
       </ion-card>
     </ng-container>
-
+    
+    <ion-card *ngIf="selectedCompany !== ''" id="crearProyecto">
+      <ion-card-header>Agregar Proyecto</ion-card-header>
+      <ion-card-content>
+        <label for="company">Nombre del proyecto</label>
+        <input type="text" id="company" placeholder="Ingrese el nombre del proyecto" [(ngModel)]="nameNewProyect" required>
+    
+        <label for="companyName">Compañía seleccionada</label>
+        <input type="text" id="companyName" [value]="selectedCompany.nombre" readonly>
+    
+      </ion-card-content>
+      <ion-button (click)="postProyect()">Añadir proyecto</ion-button>
+    </ion-card>
+    
     <ng-container *ngIf="activeSection === 'proyectos'">
       <h2>Proyectos</h2>
       <ion-card *ngFor="let proj of projects">
@@ -37,8 +51,30 @@
         <ion-card-content>
           Empresa FK: {{ proj.empresaFK }}
         </ion-card-content>
+        <ion-button (click)="getProj(proj)">Agregar ticket</ion-button>
       </ion-card>
     </ng-container>
+
+    <ion-card *ngIf="selectedProject !== ''" id="crearTicket">
+      <ion-card-header>Agregar ticket</ion-card-header>
+      <ion-card-content>
+    
+        <label>Nombre del proyecto</label>
+        <div>{{ selectedProject.titulo }}</div>  <!-- Muestra el nombre del proyecto seleccionado -->
+    
+        <label for="desc">Descripción del ticket</label>
+        <textarea id="desc" [(ngModel)]="ticketDesc" placeholder="Ingrese la descripción del ticket" required></textarea>
+      
+        <label for="usuario">Seleccionar Usuario</label>
+        <ion-select [(ngModel)]="selectedUserId" placeholder="Seleccione un usuario" name="usuario" required>
+          <ion-select-option *ngFor="let user of users" [value]="user.idUser">
+            {{ user.nombre }}
+          </ion-select-option>
+        </ion-select>
+    
+        <ion-button (click)="postTicket()">Agregar ticket</ion-button>
+      </ion-card-content>
+    </ion-card>
 
     <ng-container *ngIf="activeSection === 'tikets'">
       <h2>Tíquets</h2>
@@ -48,10 +84,13 @@
         </ion-card-header>
         <ion-card-content>
           Descripción: {{ ticket.desc }} <br />
-          Estado: {{ ticket.estado }} <br />
           Proyecto FK: {{ ticket.proyectoFK }} <br />
-          Usuario FK: {{ ticket.usuarioFK }}
+          Usuario FK: {{ ticket.usuarioFK }} <br />
+          Estado: {{ ticket.estado }} 
         </ion-card-content>
+        <ion-button (clic)="getTicket(ticket)">Add coment</ion-button>
+        <ion-button (clic)="getTicket(ticket)">Change desc</ion-button>
+        <ion-button (clic)="getTicket(ticket)">change status</ion-button>
       </ion-card>
     </ng-container>
 

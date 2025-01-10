@@ -40,7 +40,6 @@ export class HomePage {
   getCompanies() {
     this.http.get('http://localhost:8000/corporations').subscribe(
       (response) => {
-        console.log('Respuesta del servidor:', response);
         this.companies = response;
       }, (error) => { console.error('Error al obtener las compañias del servidor:', error); }
     )

@@ -12,7 +12,7 @@ import { IonicModule } from '@ionic/angular';
   imports: [CommonModule, FormsModule, IonicModule],
 })
 export class LookDataPage implements OnInit {
-  activeSection: string = 'companias'; // Estado actual
+  activeSection: string = 'companias'; // Estado inicial
 
   companies: any = [];
   projects: any = [];

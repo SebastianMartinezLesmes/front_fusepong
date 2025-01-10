@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-
 import { IonicModule } from '@ionic/angular';
+import { FormsModule } from '@angular/forms';
+import { LookDataPage } from './look-data.page';
 
 import { LookDataPageRoutingModule } from './look-data-routing.module';
 
-import { LookDataPage } from './look-data.page';
 
 @NgModule({
   imports: [

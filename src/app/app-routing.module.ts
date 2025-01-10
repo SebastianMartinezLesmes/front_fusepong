@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { LookDataPage } from './look-data/look-data.page'; // Importa directamente el componente standalone
+import { HomePage } from './home/home.page';
+
 
 const routes: Routes = [
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule),
-  },
+    component: HomePage,  },
   {
     path: '',
     redirectTo: 'home',
@@ -14,7 +15,8 @@ const routes: Routes = [
   },
   {
     path: 'look-data',
-    component: LookDataPage, // Usa el componente directamente
+    component: LookDataPage,
+    pathMatch: 'full', // Usa el componente directamente
   },
 ];
 

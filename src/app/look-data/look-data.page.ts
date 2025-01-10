@@ -71,6 +71,9 @@ export class LookDataPage implements OnInit {
     console.log('Datos de la compañía seleccionada:', comp);
     this.selectedCompany = comp;
   };
+  closeWindowComp(){
+    this.selectedCompany = null;
+  }
   postProyect(): void {
     if (!this.nameNewProyect || !this.selectedCompany) {
       console.error('Faltan datos para agregar el proyecto');
@@ -106,6 +109,9 @@ export class LookDataPage implements OnInit {
   getProj(proj:any){
     console.log('Datos del Proyecto seleccionada:', proj);
     this.selectedProject = proj;
+  };
+  closeWindowProyect(){
+    this.selectedProject = null;
   };
   postTicket() {
     if (!this.ticketDesc || !this.ticketEstado || !this.selectedUserId || !this.selectedProject) {
@@ -145,14 +151,17 @@ export class LookDataPage implements OnInit {
     )
   };
 
-  selectedTicket: any = [];
+  selectedTicket: any = null;
   ticketWindow: string = '';
   ticketStatus: string  = '';
   getTicket(ticket: any, action: string) {
     console.log('Datos del ticket seleccionada:', ticket);
     this.selectedTicket = ticket;
     this.ticketWindow = action; // Cambia la ventana según la acción seleccionada
-  }
+  };
+  closeWindowTicket(){
+    this.selectedTicket = null;
+  };
 
   postComentTicket(){
     if (!this.ticketComentarios) {

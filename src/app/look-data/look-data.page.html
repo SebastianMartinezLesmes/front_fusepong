@@ -40,6 +40,7 @@
     
       </ion-card-content>
       <ion-button (click)="postProyect()">Añadir proyecto</ion-button>
+      <ion-button (click)="closeWindowComp()">cerrar ventana</ion-button>
     </ion-card>
     
     <ng-container *ngIf="activeSection === 'proyectos'">
@@ -73,6 +74,7 @@
         </ion-select>
     
         <ion-button (click)="postTicket()">Agregar ticket</ion-button>
+        <ion-button (click)="closeWindowProyect()">cerrar ventana</ion-button>
       </ion-card-content>
     </ion-card>
 
@@ -103,6 +105,7 @@
         </ion-item>
       </ion-card-content>
       <ion-button (click)="postComentTicket()">Add Comment</ion-button>
+      <ion-button (click)="closeWindowTicket()">Cerrar ventana</ion-button>
     </ion-card>
     
     <ion-card *ngIf="selectedTicket && ticketWindow === 'changeDesc'">
@@ -112,6 +115,7 @@
         <textarea id="desc" [(ngModel)]="ticketDesc" placeholder="Ingrese la descripción del ticket" required></textarea>
       </ion-card-content>
       <ion-button (click)="putDescTicket()">Change descripcion</ion-button>
+      <ion-button (click)="closeWindowTicket()">Cerrar ventana</ion-button>
     </ion-card>
     
     <ion-card *ngIf="selectedTicket && ticketWindow === 'changeStatus'">
@@ -127,6 +131,8 @@
         </ion-item>
       </ion-card-content>
       <ion-button (click)="putStatusTicket()">Change status</ion-button>
+      <ion-button (click)="closeWindowTicket()">Cerrar ventana</ion-button>
+
     </ion-card>    
 
     <ng-container *ngIf="activeSection === 'usuarios'">

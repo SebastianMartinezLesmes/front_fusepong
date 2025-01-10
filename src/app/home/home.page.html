@@ -34,46 +34,48 @@
             <input type="password" id="password" [(ngModel)]="password" name="password" placeholder="Enter your password" required>
         <button type="submit">Login</button>
         </form>
-
     </div>
 
     <!-- create_person_account.html -->
     <div class="card">
         <h2>Create Personal Account</h2>
-        <form>
+        <form (submit)="postUser($event)">
             <label for="name">Name</label>
-            <input type="text" id="name" placeholder="Enter your name" required>
-
+            <input type="text" id="name" placeholder="Enter your name" [(ngModel)]="name" name="name" required/>
+        
             <label for="email">Email</label>
-            <input type="email" id="email" placeholder="Enter your email" required>
-
+            <input type="email" id="email" placeholder="Enter your email" [(ngModel)]="email" name="email" required/>
+        
             <label for="password">Password</label>
-            <input type="password" id="password" placeholder="Enter a password" required>
+            <input type="password" id="password" placeholder="Enter a password" [(ngModel)]="password" name="password" required/>
             <small>Password must be at least 8 characters long and contain an uppercase letter.</small>
-
+        
             <button type="submit">Create Account</button>
         </form>
-    </div>
+      </div>
 
     <!-- create_company_account.html -->
     <div class="card">
         <h2>Create Company Account</h2>
-        <form>
-            <label for="company-name">Company Name</label>
-            <input type="text" id="company-name" placeholder="Enter company name" required>
-
-            <label for="nit">NIT</label>
-            <input type="text" id="nit" placeholder="Enter company NIT" required>
-
-            <label for="address">Address</label>
-            <input type="text" id="address" placeholder="Enter company address" required>
-
-            <label for="email">Email</label>
-            <input type="email" id="email" placeholder="Enter company email" required>
-
-            <button type="submit">Create Company</button>
+        <form (submit)="postCompany($event)">
+          <label for="company-name">Company Name</label>
+          <input type="text" id="company-name" placeholder="Enter company name" [(ngModel)]="companyName" name="companyName" required/>
+      
+          <label for="nit">NIT</label>
+          <input type="text" id="nit" placeholder="Enter company NIT" [(ngModel)]="nit" name="nit" required/>
+      
+          <label for="address">Address</label>
+          <input type="text" id="address" placeholder="Enter company address" [(ngModel)]="address" name="address" required/>
+      
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="Enter company email" [(ngModel)]="email" name="email" required/>
+      
+          <label for="phone">Phone</label>
+          <input type="tel" id="phone" placeholder="Enter company phone" [(ngModel)]="phone" name="phone" required/>
+      
+          <button type="submit">Create Company</button>
         </form>
-    </div>
+      </div>
 
     <!-- ticket_story.html -->
     <div class="card">

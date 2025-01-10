@@ -5,12 +5,12 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <div>
+  <ion-item>
     <ion-button (click)="setActiveSection('companias')">Compañías</ion-button>
     <ion-button (click)="setActiveSection('proyectos')">Proyectos</ion-button>
     <ion-button (click)="setActiveSection('tikets')">Tíquets</ion-button>
     <ion-button (click)="setActiveSection('usuarios')">Usuarios</ion-button>
-  </div>
+  </ion-item>
 
   <div>
     <ng-container *ngIf="activeSection === 'companias'">
@@ -90,9 +90,25 @@
           Usuario FK: {{ ticket.usuarioFK }} <br />
           Estado: {{ ticket.estado }} 
         </ion-card-content>
-        <ion-button (click)="getTicket(ticket, 'addComent')">Add coment</ion-button>
-        <ion-button (click)="getTicket(ticket, 'changeDesc')">Change desc</ion-button>
-        <ion-button (click)="getTicket(ticket, 'changeStatus')">Change status</ion-button>
+        <ion-accordion-group>
+          <ion-accordion>
+            <ion-item slot="header">
+              <ion-label>Comentarios ({{ ticket.comentarios?.length || 0 }})</ion-label>
+            </ion-item>
+            <div class="ion-padding" slot="content">
+              <ion-list>
+                <ion-item *ngFor="let comentario of ticket.comentarios">
+                  {{comentario.idComent}} / {{ comentario.comentario }}
+                </ion-item>
+              </ion-list>
+            </div>
+          </ion-accordion>
+        </ion-accordion-group>
+        <ion-item>
+          <ion-button (click)="getTicket(ticket, 'addComent')">Add coment</ion-button>
+          <ion-button (click)="getTicket(ticket, 'changeDesc')">Change desc</ion-button>
+          <ion-button (click)="getTicket(ticket, 'changeStatus')">Change status</ion-button>
+        </ion-item>
       </ion-card>
     </ng-container>
     
@@ -132,7 +148,6 @@
       </ion-card-content>
       <ion-button (click)="putStatusTicket()">Change status</ion-button>
       <ion-button (click)="closeWindowTicket()">Cerrar ventana</ion-button>
-
     </ion-card>    
 
     <ng-container *ngIf="activeSection === 'usuarios'">

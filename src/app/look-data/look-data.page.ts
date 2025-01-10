@@ -163,12 +163,31 @@ export class LookDataPage implements OnInit {
     this.selectedTicket = null;
   };
 
-  postComentTicket(){
+  postComentTicket() {
     if (!this.ticketComentarios) {
-      console.error('Faltan datos para agregar el ticket');
+      console.error('Faltan datos para agregar el comentario');
       return;
     }
-  };
+  
+    // Crear un objeto con el campo 'comentario'
+    const comentarioData = { comentario: this.ticketComentarios };
+  
+    // Realizar la solicitud POST al endpoint con el cuerpo adecuado
+    this.http.post(`http://localhost:8000/ticketsComents/${this.selectedTicket.idTicket}/comentarios`, comentarioData)
+    .subscribe(
+      (response: any) => {
+        console.log('Comentario agregado con éxito:', response);
+
+        // Actualizar la lista de comentarios en el ticket seleccionado
+        this.selectedTicket.comentarios.push(response.comentarios[response.comentarios.length - 1]); // Solo agregar el nuevo comentario
+        this.ticketComentarios = ''; // Limpiar el campo de entrada del comentario
+        this.ticketWindow = ''; // Cerrar la ventana de comentario
+      },
+      (error) => {
+        console.error('Error al agregar el comentario:', error);
+      }
+    );
+  };  
 
   putDescTicket(){
     if (!this.ticketDesc) {

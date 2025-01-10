@@ -1,0 +1,70 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Datos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div>
+    <ion-button (click)="setActiveSection('companias')">Compañías</ion-button>
+    <ion-button (click)="setActiveSection('proyectos')">Proyectos</ion-button>
+    <ion-button (click)="setActiveSection('tikets')">Tíquets</ion-button>
+    <ion-button (click)="setActiveSection('usuarios')">Usuarios</ion-button>
+  </div>
+
+  <div>
+    <ng-container *ngIf="activeSection === 'companias'">
+      <h2>Compañías</h2>
+      <ion-card *ngFor="let comp of companies">
+        <ion-card-header>
+          <ion-card-title>{{ comp.nombre }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          NIT: {{ comp.nit }} <br />
+          Teléfono: {{ comp.telefono }} <br />
+          Dirección: {{ comp.direccion }} <br />
+          Correo: {{ comp.correo }}
+        </ion-card-content>
+      </ion-card>
+    </ng-container>
+
+    <ng-container *ngIf="activeSection === 'proyectos'">
+      <h2>Proyectos</h2>
+      <ion-card *ngFor="let proj of projects">
+        <ion-card-header>
+          <ion-card-title>{{ proj.titulo }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          Empresa FK: {{ proj.empresaFK }}
+        </ion-card-content>
+      </ion-card>
+    </ng-container>
+
+    <ng-container *ngIf="activeSection === 'tikets'">
+      <h2>Tíquets</h2>
+      <ion-card *ngFor="let ticket of tickets">
+        <ion-card-header>
+          <ion-card-title>ID: {{ ticket.idTicket }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          Descripción: {{ ticket.desc }} <br />
+          Estado: {{ ticket.estado }} <br />
+          Proyecto FK: {{ ticket.proyectoFK }} <br />
+          Usuario FK: {{ ticket.usuarioFK }}
+        </ion-card-content>
+      </ion-card>
+    </ng-container>
+
+    <ng-container *ngIf="activeSection === 'usuarios'">
+      <h2>Usuarios</h2>
+      <ion-card *ngFor="let user of users">
+        <ion-card-header>
+          <ion-card-title>Nombre: {{ user.nombre }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          Correo: {{ user.correo }} <br />
+        </ion-card-content>
+      </ion-card>
+    </ng-container>
+  </div>
+</ion-content>

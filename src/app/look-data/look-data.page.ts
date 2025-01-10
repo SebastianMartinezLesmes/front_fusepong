@@ -189,18 +189,64 @@ export class LookDataPage implements OnInit {
     );
   };  
 
-  putDescTicket(){
+  putDescTicket() {
     if (!this.ticketDesc) {
-      console.error('Faltan datos para actualizar la descripcion del ticket');
+      console.error('Faltan datos para actualizar la descripción del ticket');
       return;
     }
+  
+    // Crear el cuerpo de la solicitud
+    const descripcionData = {
+      desc: this.ticketDesc
+    };
+  
+    // Realizar la solicitud PUT al backend
+    this.http.put(`http://localhost:8000/ticketsDesc/${this.selectedTicket.idTicket}`, descripcionData)
+    .subscribe(
+      (response: any) => {
+        console.log('Descripción del ticket actualizada con éxito:', response);
+
+        // Actualizar la descripción del ticket en el frontend
+        this.selectedTicket.desc = this.ticketDesc;
+
+        // Limpiar los campos y cerrar la ventana
+        this.ticketDesc = '';  // Limpiar el campo de descripción
+        this.ticketWindow = '';  // Cerrar la ventana de cambio de descripción
+      },
+      (error) => {
+        console.error('Error al actualizar la descripción del ticket:', error);
+      }
+    );
   };
 
-  putStatusTicket(){
+  putStatusTicket() {
     if (!this.ticketStatus) {
       console.error('Faltan datos para actualizar el estado del ticket');
       return;
     }
+  
+    // Crear el cuerpo de la solicitud
+    const estadoData = {
+      estado: this.ticketStatus
+    };
+  
+    // Realizar la solicitud PUT al backend
+    this.http.put(`http://localhost:8000/ticketsState/${this.selectedTicket.idTicket}`, estadoData)
+      .subscribe(
+        (response: any) => {
+          console.log('Estado del ticket actualizado con éxito:', response);
+  
+          // Actualizar el estado del ticket en el frontend
+          this.selectedTicket.estado = this.ticketStatus;
+  
+          // Limpiar los campos y cerrar la ventana
+          this.ticketStatus = '';  // Limpiar el campo de estado
+          this.ticketWindow = '';  // Cerrar la ventana de cambio de estado
+        },
+        (error) => {
+          console.error('Error al actualizar el estado del ticket:', error);
+        }
+      );
   };
 
 }

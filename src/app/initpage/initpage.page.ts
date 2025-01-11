@@ -70,7 +70,7 @@ export class InitpagePage implements OnInit {
     event.preventDefault(); 
 
     if (!this.email || !this.password) {
-      console.log('Por favor, ingresa tu email y contraseña.');
+      // console.log('Por favor, ingresa tu email y contraseña.');
       return;
     }
       const user = this.users.find(
@@ -78,10 +78,10 @@ export class InitpagePage implements OnInit {
     );
 
     if (user) {
-      console.log('Inicio de sesión exitoso.', user);
+      // console.log('Inicio de sesión exitoso.', user);
         this.router.navigate(['./look-data'])
     } else {
-      console.log('Email o contraseña incorrectos.');
+      // console.log('Email o contraseña incorrectos.');
     }
   };
 
@@ -91,28 +91,25 @@ export class InitpagePage implements OnInit {
     this.password = '';
   };
   postUser(event: Event) {
-    event.preventDefault(); // Evitar recargar la página al enviar el formulario
+    event.preventDefault(); 
 
-    // Validar los datos antes de enviarlos
     if (!this.name || !this.email || !this.password) {
       console.error('Por favor, completa todos los campos.');
       return;
     }
 
-    // Crear el objeto usuario
     const newUser = {
-      idUser: this.users.length + 1, // Asignar un ID incremental
+      idUser: this.users.length + 1, 
       nombre: this.name,
       correo: this.email,
       contrasena: this.password,
     };
 
-    // Realizar la solicitud POST
     this.http.post('http://localhost:8000/createUsers', newUser).subscribe(
       (response) => {
-        console.log('Usuario creado exitosamente:', response);
-        this.getUsers(); // Actualizar la lista de usuarios
-        this.resetForm(); // Limpiar el formulario
+        // console.log('Usuario creado exitosamente:', response);
+        this.getUsers(); 
+        this.resetForm(); 
       },
       (error) => {
         console.error('Error al crear el usuario:', error);
@@ -128,17 +125,15 @@ export class InitpagePage implements OnInit {
     this.phone = '';
   };
   postCompany(event: Event) {
-    event.preventDefault(); // Evitar que el formulario recargue la página
+    event.preventDefault(); 
 
-    // Validar los datos antes de enviarlos
     if (!this.companyName || !this.nit || !this.address || !this.email || !this.phone) {
       console.error('Por favor, completa todos los campos.');
       return;
     }
 
-    // Crear el objeto de compañía
     const newCompany = {
-      idEmpresa: this.companies.length + 1, // Asignar un ID incremental
+      idEmpresa: this.companies.length + 1, 
       nombre: this.companyName,
       nit: this.nit,
       direccion: this.address,
@@ -146,12 +141,11 @@ export class InitpagePage implements OnInit {
       telefono: this.phone,
     };
 
-    // Realizar la solicitud POST
     this.http.post('http://localhost:8000/createCorporations', newCompany).subscribe(
       (response) => {
-        console.log('Compañía creada exitosamente:', response);
-        this.getCompanies(); // Actualizar la lista de compañías
-        this.resetCompanyForm(); // Limpiar el formulario
+        // console.log('Compañía creada exitosamente:', response);
+        this.getCompanies(); 
+        this.resetCompanyForm(); 
       },
       (error) => {
         console.error('Error al crear la compañía:', error);

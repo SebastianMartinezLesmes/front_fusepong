@@ -1,13 +1,64 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>initpage</ion-title>
+    <ion-button (click)="back()">Back</ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">initpage</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <main>
+    <!-- Login Form -->
+    <div class="card" *ngIf="currentPage === 'login'">
+      <h2>Login</h2>
+      <form (submit)="login($event)">
+        <label for="email">Email</label>
+        <input type="email" id="email" [(ngModel)]="email" name="email" placeholder="Enter your email" required>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" [(ngModel)]="password" name="password" placeholder="Enter your password" required>
+        <button type="submit">Login</button>
+      </form>
+    </div>
+
+    <!-- Create Personal Account Form -->
+    <div class="card" *ngIf="currentPage === 'create-user'">
+      <h2>Create Personal Account</h2>
+      <form (submit)="postUser($event)">
+        <label for="name">Name</label>
+        <input type="text" id="name" placeholder="Enter your name" [(ngModel)]="name" name="name" required />
+
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="Enter your email" [(ngModel)]="email" name="email" required />
+
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Enter a password" [(ngModel)]="password" name="password" required />
+        <small>Password must be at least 8 characters long and contain an uppercase letter.</small>
+
+        <button type="submit">Create Account</button>
+      </form>
+    </div>
+
+    <!-- Create Company Account Form -->
+    <div class="card" *ngIf="currentPage === 'create-company'">
+      <h2>Create Company Account</h2>
+      <form (submit)="postCompany($event)">
+        <label for="company-name">Company Name</label>
+        <input type="text" id="company-name" placeholder="Enter company name" [(ngModel)]="companyName" name="companyName" required />
+
+        <label for="nit">NIT</label>
+        <input type="text" id="nit" placeholder="Enter company NIT" [(ngModel)]="nit" name="nit" required />
+
+        <label for="address">Address</label>
+        <input type="text" id="address" placeholder="Enter company address" [(ngModel)]="address" name="address" required />
+
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="Enter company email" [(ngModel)]="email" name="email" required />
+
+        <label for="phone">Phone</label>
+        <input type="tel" id="phone" placeholder="Enter company phone" [(ngModel)]="phone" name="phone" required />
+
+        <button type="submit">Create Company</button>
+      </form>
+    </div>
+  </main>
 </ion-content>

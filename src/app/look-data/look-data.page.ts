@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-look-data',
   templateUrl: './look-data.page.html',
@@ -19,13 +21,20 @@ export class LookDataPage implements OnInit {
   tickets: any = [];
   users: any = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+  ) {}
 
   ngOnInit() {
     this.getCompanies();
     this.getProjects();
     this.getTickets();
     this.getUsers();
+  }
+
+  back(){
+    this.router.navigate(['./home'])
   }
 
   setActiveSection(section: string) {
@@ -157,7 +166,7 @@ export class LookDataPage implements OnInit {
   getTicket(ticket: any, action: string) {
     console.log('Datos del ticket seleccionada:', ticket);
     this.selectedTicket = ticket;
-    this.ticketWindow = action; // Cambia la ventana según la acción seleccionada
+    this.ticketWindow = action; 
   };
   closeWindowTicket(){
     this.selectedTicket = null;
@@ -168,85 +177,61 @@ export class LookDataPage implements OnInit {
       console.error('Faltan datos para agregar el comentario');
       return;
     }
-  
-    // Crear un objeto con el campo 'comentario'
     const comentarioData = { comentario: this.ticketComentarios };
-  
-    // Realizar la solicitud POST al endpoint con el cuerpo adecuado
     this.http.post(`http://localhost:8000/ticketsComents/${this.selectedTicket.idTicket}/comentarios`, comentarioData)
     .subscribe(
       (response: any) => {
         console.log('Comentario agregado con éxito:', response);
-
-        // Actualizar la lista de comentarios en el ticket seleccionado
-        this.selectedTicket.comentarios.push(response.comentarios[response.comentarios.length - 1]); // Solo agregar el nuevo comentario
-        this.ticketComentarios = ''; // Limpiar el campo de entrada del comentario
-        this.ticketWindow = ''; // Cerrar la ventana de comentario
+        this.selectedTicket.comentarios.push(response.comentarios[response.comentarios.length - 1]); 
+        this.ticketComentarios = ''; 
+        this.ticketWindow = ''; 
       },
       (error) => {
         console.error('Error al agregar el comentario:', error);
       }
-    );
+    )
   };  
-
   putDescTicket() {
     if (!this.ticketDesc) {
       console.error('Faltan datos para actualizar la descripción del ticket');
       return;
     }
-  
-    // Crear el cuerpo de la solicitud
     const descripcionData = {
       desc: this.ticketDesc
     };
-  
-    // Realizar la solicitud PUT al backend
     this.http.put(`http://localhost:8000/ticketsDesc/${this.selectedTicket.idTicket}`, descripcionData)
     .subscribe(
       (response: any) => {
         console.log('Descripción del ticket actualizada con éxito:', response);
-
-        // Actualizar la descripción del ticket en el frontend
         this.selectedTicket.desc = this.ticketDesc;
-
-        // Limpiar los campos y cerrar la ventana
-        this.ticketDesc = '';  // Limpiar el campo de descripción
-        this.ticketWindow = '';  // Cerrar la ventana de cambio de descripción
+        this.ticketDesc = '';  
+        this.ticketWindow = '';  
       },
       (error) => {
         console.error('Error al actualizar la descripción del ticket:', error);
       }
-    );
+    )
   };
-
   putStatusTicket() {
     if (!this.ticketStatus) {
       console.error('Faltan datos para actualizar el estado del ticket');
       return;
     }
-  
-    // Crear el cuerpo de la solicitud
-    const estadoData = {
+      const estadoData = {
       estado: this.ticketStatus
     };
-  
-    // Realizar la solicitud PUT al backend
     this.http.put(`http://localhost:8000/ticketsState/${this.selectedTicket.idTicket}`, estadoData)
-      .subscribe(
-        (response: any) => {
-          console.log('Estado del ticket actualizado con éxito:', response);
-  
-          // Actualizar el estado del ticket en el frontend
+    .subscribe(
+      (response: any) => {
+        console.log('Estado del ticket actualizado con éxito:', response);
           this.selectedTicket.estado = this.ticketStatus;
-  
-          // Limpiar los campos y cerrar la ventana
-          this.ticketStatus = '';  // Limpiar el campo de estado
-          this.ticketWindow = '';  // Cerrar la ventana de cambio de estado
-        },
-        (error) => {
-          console.error('Error al actualizar el estado del ticket:', error);
-        }
-      );
+          this.ticketStatus = '';  
+        this.ticketWindow = '';  
+      },
+      (error) => {
+        console.error('Error al actualizar el estado del ticket:', error);
+      }
+    )
   };
 
 }

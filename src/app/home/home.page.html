@@ -1,138 +1,22 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title>Blank</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <main>
     <div class="card">
-        <h2>Welcome to the Project Tracking App</h2>
-        <p>Please use the navigation menu to access different pages.</p>
-        <nav>
-            <ul>
-                <li><a href="login.html">Login</a></li>
-                <li><a href="create_person_account.html">Create Personal Account</a></li>
-                <li><a href="create_company_account.html">Create Company Account</a></li>
-                <li><a href="ticket_story.html">Ticket Story</a></li>
-                <li><a href="history.html">History</a></li>
-            </ul>
-        </nav>
-    </div>
-
-    <!-- Example of one page setup -->
-    <!-- login.html -->
-    <div class="card">
-        <h2>Login</h2>
-        <form (submit)="login($event)">
-            <label for="email">Email</label>
-            <input type="email" id="email" [(ngModel)]="email" name="email" placeholder="Enter your email" required>
-
-            <label for="password">Password</label>
-            <input type="password" id="password" [(ngModel)]="password" name="password" placeholder="Enter your password" required>
-        <button type="submit">Login</button>
-        </form>
-    </div>
-
-    <!-- create_person_account.html -->
-    <div class="card">
-        <h2>Create Personal Account</h2>
-        <form (submit)="postUser($event)">
-            <label for="name">Name</label>
-            <input type="text" id="name" placeholder="Enter your name" [(ngModel)]="name" name="name" required/>
-        
-            <label for="email">Email</label>
-            <input type="email" id="email" placeholder="Enter your email" [(ngModel)]="email" name="email" required/>
-        
-            <label for="password">Password</label>
-            <input type="password" id="password" placeholder="Enter a password" [(ngModel)]="password" name="password" required/>
-            <small>Password must be at least 8 characters long and contain an uppercase letter.</small>
-        
-            <button type="submit">Create Account</button>
-        </form>
-      </div>
-
-    <!-- create_company_account.html -->
-    <div class="card">
-        <h2>Create Company Account</h2>
-        <form (submit)="postCompany($event)">
-          <label for="company-name">Company Name</label>
-          <input type="text" id="company-name" placeholder="Enter company name" [(ngModel)]="companyName" name="companyName" required/>
-      
-          <label for="nit">NIT</label>
-          <input type="text" id="nit" placeholder="Enter company NIT" [(ngModel)]="nit" name="nit" required/>
-      
-          <label for="address">Address</label>
-          <input type="text" id="address" placeholder="Enter company address" [(ngModel)]="address" name="address" required/>
-      
-          <label for="email">Email</label>
-          <input type="email" id="email" placeholder="Enter company email" [(ngModel)]="email" name="email" required/>
-      
-          <label for="phone">Phone</label>
-          <input type="tel" id="phone" placeholder="Enter company phone" [(ngModel)]="phone" name="phone" required/>
-      
-          <button type="submit">Create Company</button>
-        </form>
-      </div>
-
-    <!-- ticket_story.html -->
-    <div class="card">
-        <h2>Ticket Story</h2>
-        <form>
-            <label for="company">Company</label>
-            <input type="text" id="company" placeholder="Enter company name" required>
-
-            <label for="details">Details</label>
-            <textarea id="details" placeholder="Describe the ticket" required></textarea>
-
-            <label for="status">Status</label>
-            <select id="status" required>
-                <option value="in-progress">In Progress</option>
-                <option value="completed">Completed</option>
-            </select>
-
-            <button type="submit">Submit Ticket</button>
-        </form>
-    </div>
-
-    <!-- history.html -->
-    <div class="card">
-        <h2>History</h2>
-        <form>
-            <label for="search">Search</label>
-            <input type="text" id="search" placeholder="Search by company or details">
-            <button type="button">Search</button>
-        </form>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>Company</th>
-                    <th>Details</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Company 1</td>
-                    <td>Ticket for feature X</td>
-                    <td>
-                        <button>Edit</button>
-                        <button>Delete</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Company 2</td>
-                    <td>Ticket for bug fix Y</td>
-                    <td>
-                        <button>Edit</button>
-                        <button>Delete</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+      <h2>Welcome to the Project Tracking App</h2>
+      <p>Please use the navigation menu to access different pages.</p>
+      <nav>
+        <ul>
+          <!-- Usa 'routerLink' en lugar de 'href' para la navegación en Angular -->
+          <li><a (click)="goLogin()">Inicio de sesión</a></li>
+          <li><a (click)="goCreateUser()">Crear Cuenta</a></li>
+          <li><a (click)="goCreateCompany()">Asociar empresa</a></li>
+        </ul>
+      </nav>
     </div>
   </main>
 </ion-content>

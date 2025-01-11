@@ -1,0 +1,100 @@
+@mixin modal-form{
+    position: fixed; /* Posiciona el card de manera fija */
+    top: 50%; /* Mitad de la pantalla verticalmente */
+    left: 50%; /* Mitad de la pantalla horizontalmente */
+    transform: translate(-50%, -50%); /* Centra el elemento */
+    z-index: 1000; /* Asegura que esté por encima de otros elementos */
+    width: 90%; /* Ocupa hasta el 90% del ancho de la pantalla */
+    max-width: 400px; /* Limita el ancho máximo */
+    background: white; /* Fondo blanco */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para dar profundidad */
+    border-radius: 8px; /* Bordes redondeados */
+    padding: 1.5rem; /* Espaciado interno */
+    display: flex;
+    flex-direction: column; /* Organiza los elementos verticalmente */
+    gap: 1rem; /* Espaciado uniforme entre los elementos */
+} 
+
+@mixin modal-style-ticket {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    width: 90%;
+    max-width: 400px;
+    background: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+#crearProyecto, #crearTicket {
+    @include modal-form;
+
+    ion-card-header{
+        font-size: 1.25rem; /* Tamaño de fuente ligeramente mayor */
+        font-weight: bold; /* Resalta el encabezado */
+        text-align: center;
+    }
+    label {
+        font-weight: bold; /* Resalta los títulos */
+        margin-bottom: 0.5rem; /* Espaciado debajo del label */
+    }
+    textarea {
+        width: 100%; /* Ancho completo dentro del card */
+        height: 100px; /* Altura fija para el campo de texto */
+        padding: 0.5rem; /* Espaciado interno */
+        border: 1px solid #ccc; /* Borde gris claro */
+        border-radius: 4px; /* Bordes redondeados */
+        resize: none; /* Desactiva el redimensionamiento */
+        font-size: 1rem; /* Tamaño de texto estándar */
+    }
+    ion-select {
+        width: 100%; /* Asegura que ocupe todo el ancho disponible */
+        margin-top: 0.5rem; /* Espaciado superior */
+        width: 80%;
+
+    }
+    ion-button {
+        width: 100%;
+        align-self: flex-end; /* Alinea los botones al final */
+        margin-top: 1rem; /* Espaciado superior */
+    }
+    ion-button:first-of-type {
+        margin-right: 0.5rem; /* Añade espacio entre los botones */
+    }
+}
+
+#addComent, #changeDesc, #changeStatus{
+    @include modal-style-ticket;
+
+    ion-card-header {
+        font-size: 1.25rem; /* Tamaño de fuente ligeramente mayor */
+        font-weight: bold; /* Resalta el encabezado */
+        text-align: center; /* Centra el texto */
+    }
+    ion-label {
+        font-weight: bold; /* Resalta el texto del label */
+        margin-bottom: 0.5rem; /* Espaciado debajo del label */
+    }
+    ion-input {
+        width: 100%; /* Ancho completo dentro del card */
+        padding: 0.5rem; /* Espaciado interno */
+        border: 1px solid #ccc; /* Borde gris claro */
+        border-radius: 4px; /* Bordes redondeados */
+        font-size: 1rem; /* Tamaño de texto estándar */
+    } 
+    ion-button {
+        width: 100%;
+        align-self: flex-end; /* Alinea los botones al final */
+        margin-top: 1rem; /* Espaciado superior */
+    }
+    ion-button:first-of-type {
+        margin-right: 0.5rem; /* Espacio entre los botones */
+    }
+}
+  

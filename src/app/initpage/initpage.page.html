@@ -1,8 +1,8 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-item>
     <ion-title>initpage</ion-title>
     <ion-button (click)="back()">Back</ion-button>
-  </ion-toolbar>
+  </ion-item>
 </ion-header>
 
 <ion-content [fullscreen]="true">
@@ -32,7 +32,6 @@
 
         <label for="password">Password</label>
         <input type="password" id="password" placeholder="Enter a password" [(ngModel)]="password" name="password" required />
-        <small>Password must be at least 8 characters long and contain an uppercase letter.</small>
 
         <button type="submit">Create Account</button>
       </form>

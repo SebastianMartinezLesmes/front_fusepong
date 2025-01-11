@@ -1,8 +1,8 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Datos</ion-title>
+  <ion-item>
+    <ion-title>History & Dates</ion-title>
     <ion-button (click)="back()">LogOut</ion-button>
-  </ion-toolbar>
+  </ion-item>
 </ion-header>
 
 <ion-content [fullscreen]="true">
@@ -113,7 +113,7 @@
       </ion-card>
     </ng-container>
     
-    <ion-card *ngIf="selectedTicket && ticketWindow === 'addComent'">
+    <ion-card *ngIf="selectedTicket && ticketWindow === 'addComent'" id="addComent">
       <ion-card-header>Add comment</ion-card-header>
       <ion-card-content>
         <ion-item>
@@ -125,7 +125,7 @@
       <ion-button (click)="closeWindowTicket()">Cerrar ventana</ion-button>
     </ion-card>
     
-    <ion-card *ngIf="selectedTicket && ticketWindow === 'changeDesc'">
+    <ion-card *ngIf="selectedTicket && ticketWindow === 'changeDesc'" id="changeDesc">
       <ion-card-header>Change descripcion</ion-card-header>
       <ion-card-content>
         <label for="desc">Descripción del ticket</label>
@@ -135,7 +135,7 @@
       <ion-button (click)="closeWindowTicket()">Cerrar ventana</ion-button>
     </ion-card>
     
-    <ion-card *ngIf="selectedTicket && ticketWindow === 'changeStatus'">
+    <ion-card *ngIf="selectedTicket && ticketWindow === 'changeStatus'" id="changeStatus">
       <ion-card-header>Change status</ion-card-header>
       <ion-card-content>
         <ion-item>

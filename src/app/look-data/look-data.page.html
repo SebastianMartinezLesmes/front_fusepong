@@ -6,12 +6,12 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-item>
+  <div id="options">
     <ion-button (click)="setActiveSection('companias')">Compañías</ion-button>
     <ion-button (click)="setActiveSection('proyectos')">Proyectos</ion-button>
     <ion-button (click)="setActiveSection('tikets')">Tíquets</ion-button>
     <ion-button (click)="setActiveSection('usuarios')">Usuarios</ion-button>
-  </ion-item>
+  </div>
 
   <div>
     <ng-container *ngIf="activeSection === 'companias'">

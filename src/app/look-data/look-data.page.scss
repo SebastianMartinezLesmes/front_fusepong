@@ -32,6 +32,30 @@
     gap: 1rem;
 }
 
+ion-content{
+    --background: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.315), rgba(255, 255, 255, 0.315), rgba(255, 255, 255, 0.493)), 
+        url('../../assets/fondo.jpg') no-repeat center center;
+    background-size: cover;
+}
+
+#options{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    margin: 2%;
+}
+
+h2{
+    text-align: center;
+    color: white;
+    font-size: 2rem; /* Tamaño de fuente ligeramente mayor */
+    font-weight: bold; /* Resalta el encabezado */
+    text-align: center;
+    margin: 2%;
+}
+
 #crearProyecto, #crearTicket {
     @include modal-form;
 
